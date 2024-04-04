@@ -136,7 +136,7 @@ body {
   
   button {
     width: 100%;
-    background-color: #ee4d2d;
+    background-color: #f3184b;
     color: #fff;
     border: none;
     padding: 10px;
@@ -146,7 +146,7 @@ body {
   }
   
   button:hover {
-    background-color: #ff6347;
+    background-color: #ff6111;
   }
   
   .bottom-text {
