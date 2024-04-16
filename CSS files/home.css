@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: Assistant,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
 }
 
 html {
@@ -27,30 +28,69 @@ nav {
   display: flex;
   align-items: center;
   width: 100%;
+  text-transform: uppercase;
+  font-weight: bolder;
 }
 
 .left ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
   display: flex;
-  list-style: none;
-  align-items: center;
 }
 
 .left ul li {
-  padding: 0 20px;
-  cursor: pointer;
-  text-transform: uppercase;
-  font-weight: 500;
-  font-size: 14px;
-  letter-spacing: .3px;
-  color: #090909;
-  line-height: 62px;
-  font-family: Whitney, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  margin-right: 20px;
+  position: relative;
+  cursor: pointer; /* Add cursor pointer to indicate it's clickable */
+}
+
+.left ul li::before {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: transparent; /* Change to transparent to hide by default */
+  transition: width 0.3s ease, background-color 0.3s ease; /* Add transition for background-color */
+}
+
+/* Custom colors for different menu items */
+.men:hover::before {
+  width: 100%;
+  background-color: red; /* Change color for Men */
+}
+
+.women:hover::before {
+  width: 100%;
+  background-color: rgb(252, 13, 224); /* Change color for Women */
+}
+
+.kids:hover::before {
+  width: 100%;
+  background-color: rgb(255, 115, 0); /* Change color for Kids */
+}
+
+.homeliving:hover::before {
+  width: 100%;
+  background-color: rgb(255, 166, 0); /* Change color for Home&Living */
+}
+
+.beauty:hover::before {
+  width: 100%;
+  background-color: TeaL; /* Change color for Beauty */
+}
+
+.studio:hover::before {
+  width: 100%;
+  background-color: red; /* Change color for Studio */
 }
 
 .left img {
   width: 53px;
   height: 36px;
-  padding: 0 50px;
+  padding: 3px 6px;
 }
 
 .container img,
@@ -257,17 +297,19 @@ nav {
   font-size: 14px;
 }
 
-.profile > img{
-  width: 25px;
-}
-.wish > img{
-  width: 25px;
-}
-.bag > img{
-  width: 25px;
+.profile>img {
+  width: 35px;
 }
 
-.profile > a{
+.wish>img {
+  width: 35px;
+}
+
+.bag>img {
+  width: 35px;
+}
+
+.profile>a {
   text-decoration: none;
   color: #000;
 }
