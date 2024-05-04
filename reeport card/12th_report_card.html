@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Card</title>
+    <link rel="stylesheet" href="report_12th.css">
+</head>
+<body>
+    <div class="container">
+        <h2 id="heading">12th Report Card</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Subject</th>
+                    <th>Marks Obtained</th>
+                    <th>Total Marks</th>
+                    <th>Grades</th> <!-- This is the new column for grades -->
+                </tr>
+            </thead>
+            <tbody id="report-body">
+                <!-- Rows will be dynamically added here -->
+            </tbody>
+        </table>
+    </div>
+    <script>
+        window.onload = function() {
+            // Retrieve parameters from URL
+            const urlParams = new URLSearchParams(window.location.search);
+            
+            // Prompt user for number of subjects
+            let numSubjects = parseInt(prompt('Enter the number of subjects:'));
+            while (isNaN(numSubjects) || numSubjects < 5) {
+                alert('Subjects cannot be less than 5!');
+                numSubjects = parseInt(prompt('Enter the number of subjects (must be 5 or more):'));
+            }
+            
+            // Prompt user for subjects and marks input dynamically
+            const tableBody = document.getElementById('report-body');
+            for (let i = 1; i <= numSubjects; i++) {
+                let subject = prompt(`Enter subject ${i}:`);
+                while (!subject) {
+                    subject = prompt(`Please enter subject ${i}:`);
+                }
+                let marks = prompt(`Enter marks obtained for ${subject}:`);
+                while (isNaN(marks) || marks < 0 || marks > 100) {
+                    marks = prompt(`Invalid marks! Enter marks obtained for ${subject} (0-100):`);
+                }
+                marks = parseInt(marks);
+                
+                const row = `
+                    <tr>
+                        <td>${subject}</td>
+                        <td>${marks}</td>
+                        <td>100</td>
+                        <td class="grade"></td>
+                    </tr>
+                `;
+                tableBody.innerHTML += row;
+            }
+            
+            // Calculate grades when marks are entered
+            const marksCells = document.querySelectorAll('#report-body td:nth-child(2)');
+            marksCells.forEach(cell => {
+                const marks = parseInt(cell.textContent);
+                const gradeCell = cell.nextElementSibling.nextElementSibling;
+                if (!isNaN(marks) && marks >= 0 && marks <= 100) {
+                    if (marks >= 95) {
+                        gradeCell.textContent = 'A1';
+                    } else if (marks >= 90) {
+                        gradeCell.textContent = 'A2';
+                    } else if (marks >= 85) {
+                        gradeCell.textContent = 'B1';
+                    } else if (marks >= 80) {
+                        gradeCell.textContent = 'B2';
+                    } else if (marks >= 70) {
+                        gradeCell.textContent = 'C';
+                    } else if (marks >= 50) {
+                        gradeCell.textContent = 'D';
+                    } else {
+                        gradeCell.textContent = 'E';
+                    }
+                } else {
+                    gradeCell.textContent = ''; // Clear grade if input is invalid
+                }
+            });
+        };
+    </script>
+</body>
+</html>

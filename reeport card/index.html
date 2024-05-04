@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Select Standard and Board</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+  <div class="container">
+    <h2>Select Standard and Board</h2>
+    <form id="standardBoardForm">
+      <label for="standard">Standard:</label>
+      <select id="standard" name="standard" required>
+        <option value="10th">10th</option>
+        <option value="12th">12th</option>
+      </select>
+      <button type="button" onclick="redirectToReport()">Next</button>
+      <!-- Call redirectToReport() function on button click -->
+    </form>
+  </div>
+  <script>
+    function redirectToReport() {
+      var standard = document.getElementById('standard').value.toLowerCase(); // Convert to lowercase for case-insensitive comparison
+
+      if (standard === '10th') {
+        window.location.href = '10th_report_card.html';
+      } else {
+        window.location.href = '12th_report_card.html';
+      }
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fighting Game</title>
+    <link rel="stylesheet" href="design.css">
+</head>
+<body>
+    <div class="container">
+        <div class="user-box">
+            <h2>User</h2>
+            <p>Health: <span id="player-health">100</span></p>
+            <p>Mana: <span id="player-mana">100</span></p>
+            <button onclick="attack()">Attack</button>
+            <button onclick="defend()">Defend</button>
+        </div>
+        <div class="opponent-box">
+            <h2>Opponent</h2>
+            <p>Health: <span id="opponent-health">100</span></p>
+            <p>Mana: <span id="opponent-mana">100</span></p>
+        </div>
+        <div class="log-box">
+            <h2>Battle Log</h2>
+            <ul id="battle-log" class="scrollable"></ul>
+        </div>
+        <div id="overlay">
+            <div id="result-message"></div>
+            <button onclick="hideOverlay()">Play Again</button>
+        </div>
+    </div>
+    <script src="functionality.js"></script>
+</body>
+</html>
