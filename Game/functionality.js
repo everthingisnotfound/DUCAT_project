@@ -31,7 +31,7 @@ function regenerateMana() {
 }
 
 function attack() {
-    if (playerTurn && playerMana > 0) {
+    if (playerTurn && playerHealth > 0 && playerMana > 0) {
         const damage = Math.min(Math.floor(Math.random() * 10) + 10, opponentHealth); // Calculate damage, ensuring it doesn't exceed opponent's health
         const critChance = Math.random();
         if (critChance > 0.8) {
@@ -46,12 +46,14 @@ function attack() {
         playerTurn = false;
         updateHealth();
         checkGameOver();
-        setTimeout(opponentAction, 1000);
+        if (opponentHealth > 0) {
+            setTimeout(opponentAction, 1000);
+        }
     }
 }
 
 function defend() {
-    if (playerTurn && playerMana > 0) {
+    if (playerTurn && playerHealth > 0 && playerMana > 0) {
         const defense = Math.floor(Math.random() * 20) + 10;
         playerHealth += defense;
         playerMana -= 15;
@@ -62,29 +64,33 @@ function defend() {
         playerTurn = false;
         updateHealth();
         checkGameOver();
-        setTimeout(opponentAction, 1000);
+        if (opponentHealth > 0) {
+            setTimeout(opponentAction, 1000);
+        }
     }
 }
 
 function opponentAction() {
-    const action = Math.random();
-    if (action > 0.5 && opponentMana > 0) {
-        const damage = Math.min(Math.floor(Math.random() * 10) + 10, playerHealth); // Calculate damage, ensuring it doesn't exceed player's health
-        playerHealth -= damage;
-        logMessage(`Opponent attacked for ${damage} damage!`);
-        opponentMana -= 10;
-    } else if (opponentMana > 0) {
-        const defense = Math.floor(Math.random() * 20) + 10;
-        opponentHealth += defense;
-        if (opponentHealth > 100) {
-            opponentHealth = 100;
+    if (opponentHealth > 0 && opponentMana > 0) {
+        const action = Math.random();
+        if (action > 0.5) {
+            const damage = Math.min(Math.floor(Math.random() * 10) + 10, playerHealth); // Calculate damage, ensuring it doesn't exceed player's health
+            playerHealth -= damage;
+            logMessage(`Opponent attacked for ${damage} damage!`);
+            opponentMana -= 10;
+        } else {
+            const defense = Math.floor(Math.random() * 20) + 10;
+            opponentHealth += defense;
+            if (opponentHealth > 100) {
+                opponentHealth = 100;
+            }
+            logMessage(`Opponent used Defense, gained ${defense} health!`);
+            opponentMana -= 15;
         }
-        logMessage(`Opponent used Defense, gained ${defense} health!`);
-        opponentMana -= 15;
+        playerTurn = true;
+        updateHealth();
+        checkGameOver();
     }
-    playerTurn = true;
-    updateHealth();
-    checkGameOver();
 }
 
 function updateHealth() {
